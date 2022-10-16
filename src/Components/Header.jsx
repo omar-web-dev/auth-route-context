@@ -1,14 +1,19 @@
-import  { React, useContext, } from 'react';
+import { React, useContext, } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext';
 
 const Header = () => {
-    const {users} = useContext(AuthContext)
-    console.log(users?.email, 'user mail')
+    const { users , userSignOut} = useContext(AuthContext)
+    const login = users?.email
+    const handelSingOut = () => {
+        userSignOut()
+        .then(()=>{})
+        .catch(error=>console.error(error))
+    }
     // console.log(users)
     return (
         <div className='header-section'>
-           <div className=" ">
+            <div className=" ">
                 <nav className="relative p-4 flex justify-between items-center bg-white">
                     <Link to='/' className="text-3xl font-semibold leading-none" > Omar Faruk </Link>
                     <div className="lg:hidden">
@@ -26,7 +31,7 @@ const Header = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                             </svg>
                         </li>
-                        
+
                         <li><Link to='service' className="focus:text-md text-gray-500 focus:text-blue-500 hover:text-blue-400 font-semibold" >Services</Link></li>
                         <li className="text-gray-300">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
@@ -46,15 +51,25 @@ const Header = () => {
                             </svg>
                         </li>
                         <li><Link to='contact' className="focus:text-md text-gray-500 focus:text-blue-500 hover:text-blue-400 font-semibold" >Contact</Link></li>
-                        <li className="text-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                            </svg>
-                        </li>
-                        <li><Link to='contact' className="focus:text-md text-gray-500 focus:text-blue-500 hover:text-blue-400 font-semibold" >profile{users?.email}</Link></li>
                     </ul>
+                    {!login ?
+                    <>
                     <Link to='sing-in' className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-semibold  rounded-xl transition duration-200" >Sign In</Link>
                     <Link to='sing-up' className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-semibold rounded-xl transition duration-200" >Sign up</Link>
+                    </>
+                :
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img src="https://placeimg.com/80/80/people" />
+                            </div>
+                        </label>
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><button >  Profile</button></li>
+                            <li><button onClick={handelSingOut}>  Logout</button></li>
+                        </ul>
+                    </div>
+                }
                 </nav>
             </div>
         </div>

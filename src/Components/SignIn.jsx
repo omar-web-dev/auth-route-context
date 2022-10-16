@@ -8,11 +8,9 @@ const SignIn = () => {
         const from = e.target
         const email = from.email.value
         const password = from.password.value
-        console.log(email, password);
     userSingIn(email, password)
         .then((singIn) => {
             const user = singIn.user;
-            console.log(user);
         })
         .catch((error) => {
             const errorCode = error.code;

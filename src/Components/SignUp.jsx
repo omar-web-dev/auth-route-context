@@ -23,6 +23,7 @@ const SignUp = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
+        from.reset()
 
     }
     return (

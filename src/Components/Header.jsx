@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext';
 
 const Header = () => {
-    const user = useContext(AuthContext)
-    // console.log(user)
+    const {users} = useContext(AuthContext)
+    console.log(users?.email, 'user mail')
+    // console.log(users)
     return (
         <div className='header-section'>
            <div className=" ">
@@ -45,6 +46,12 @@ const Header = () => {
                             </svg>
                         </li>
                         <li><Link to='contact' className="focus:text-md text-gray-500 focus:text-blue-500 hover:text-blue-400 font-semibold" >Contact</Link></li>
+                        <li className="text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                            </svg>
+                        </li>
+                        <li><Link to='contact' className="focus:text-md text-gray-500 focus:text-blue-500 hover:text-blue-400 font-semibold" >profile{users?.email}</Link></li>
                     </ul>
                     <Link to='sing-in' className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-semibold  rounded-xl transition duration-200" >Sign In</Link>
                     <Link to='sing-up' className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-semibold rounded-xl transition duration-200" >Sign up</Link>

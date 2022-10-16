@@ -1,5 +1,5 @@
 import  {createContext, React, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../firebase/firebase-config';
 
 
@@ -8,8 +8,9 @@ const auth = getAuth(app)
 const UserContext = ({children}) => {     
     const [user, setUser] = useState({userName : "Omar" }) 
     const createUser = (email, password) => createUserWithEmailAndPassword(auth, email,password)
+    const userSingIn = (email, password) => signInWithEmailAndPassword(auth, email,password)
 
-    const userInfo = {user, createUser}
+    const userInfo = {user, createUser, userSingIn}
     
     return (
         <section className='user-context-section'>
